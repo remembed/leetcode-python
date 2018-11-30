@@ -1,0 +1,38 @@
+class Solution:
+    def uncommonFromSentences(self, A, B):
+        """
+        :type A: str
+        :type B: str
+        :rtype: List[str]
+        """
+        #先把两个句子拆分成单个单词
+        la=A.split()
+        lb=B.split()
+        #重新定义一个变量使用_get_lc函数
+        la_n = self._get_lc(la)
+        lb_n = self._get_lc(lb)
+        #定义一个列表C
+        C = []
+        #遍历la_n
+        for i in la_n:
+            if i not in lb:   #if判断在la中的值是否不在lb中
+                C.append(i)  #(append是添加),把在la中不在lb中的值添加到列表C中
+            else:
+                pass
+        for i in lb_n:
+            if i not in la:
+                C.append(i)
+            else:
+                pass
+        return list(set(C))
+
+#返回一个新的数组，去除出现2次以上的单词
+    def _get_lc(self,lb):
+        D =  copy.deepcopy(lb) #deepcopy：深拷贝
+        for i in set(D):
+            if D.count(i) > 1:  #(count：计数) 计算D中每个值出现的次数
+                while i in D:
+                    D.remove(i)  #如果有出现1次以上的值那么就从D中去除
+            else:
+                pass
+        return D
